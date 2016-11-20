@@ -1,52 +1,52 @@
 #!/bin/bash
 
-echo loadkeys uk
+loadkeys uk
 
-echo parted /dev/sda
+parted /dev/sda
 
-echo mklabel msdos
+mklabel msdos
 
-echo mkpart primary ext4 1MiB 100%
+mkpart primary ext4 1MiB 100%
 
-echo set 1 boot on
+set 1 boot on
 
-echo quit
+quit
 
-echo mkfs.ext4 /dev/sda1
+mkfs.ext4 /dev/sda1
 
-echo mount /dev/sda1 /mnt
+mount /dev/sda1 /mnt
 
 # nano /etc/pacman.d/mirrorlist
 
-echo pacstrap -i /mnt base base-devel grub fish sudo xorg-server xorg-server-utils gnome gnome-extra lightdm lightdm-gtk-greeter
+pacstrap -i /mnt base base-devel grub fish sudo xorg-server xorg-server-utils gnome gnome-extra lightdm lightdm-gtk-greeter
 
-echo genfstab -U /mnt > /mnt/etc/fstab
+genfstab -U /mnt > /mnt/etc/fstab
 
-echo arch-chroot /mnt /bin/bash
+arch-chroot /mnt /bin/bash
 
 echo en_UK.UTF-8 > /etc/locale.gen
 
-echo locale-gen
+locale-gen
 
 echo LANG=en_UK.UTF-8 > /etc/locale.conf
 
-echo export LANG=en_UK.UTF-8
+export LANG=en_UK.UTF-8
 
-echo ln -s /usr/share/zoneinfo/Eurpoe/London > /etc/localtime
+ln -s /usr/share/zoneinfo/Eurpoe/London > /etc/localtime
 
-echo hwclock --systohc --utc
+hwclock --systohc --utc
 
-echo grub-install --recheck --target=i386-pc /dev/sda
+grub-install --recheck --target=i386-pc /dev/sda
 
-echo grub-mkconfig -o /boot/grub/grub.cfg
+grub-mkconfig -o /boot/grub/grub.cfg
 
 echo avenger > /etc/hostname
 
-echo passwd
+passwd
 
-echo useradd -m -G wheel,users -s /bin/fish artise
+useradd -m -G wheel,users -s /bin/fish artise
 
-echo passwd
+passwd
 
 echo systemctl start lightdm.service
 
